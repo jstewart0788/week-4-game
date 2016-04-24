@@ -3,6 +3,9 @@ body
 {
 	background-image: url("../images/background.jpg");
 	text-align: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
 }
 
 .jumbotron
@@ -19,38 +22,28 @@ h1
     text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
 }
 
-#darthVader {
-	position: absolute;
-	top:350px;
+
+#char1 {
+	position: relative;
+	top:300px;
 	right:300px;
-	height: 350px;
-	clip: rect(0, 60px, 90px, 0);
-  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
 }
 
-#obiwan {
-	position: absolute;
-	top:375px;
-	left:200px;
-	height: 350px;
-	clip: rect(0, 60px, 90px, 0);
-  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
+#char2 {
+	position: relative;
+	top:325px;
+	right:150px;
 }
 
-#darthMaul {
-	position: absolute;
-	top:375px;
-	right:200px;
-	height: 350px;
-	clip: rect(0, 60px, 90px, 0);
-  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
+#char3 {
+	position: relative;
+	top:325px;
+
 }
 
-#yoda {
-	position: absolute;
-	top:350px;
+#char4 {
+	position: relative;
+	top:187px;
 	left:300px;
-	height: 350px;
-	clip: rect(0, 60px, 90px, 0);
-  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
+
 }
