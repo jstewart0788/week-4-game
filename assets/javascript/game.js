@@ -9,6 +9,22 @@ var game = {
 	defenderObj:"",
 	defendersLeft: 2
 };
+//animation object to help with disapearing damage div
+var damage = {
+
+	disapearAttacker:function()
+	{
+		$("#aDDone").animate({opacity: '0'});
+	},
+
+	disapearDefender:function()
+	{
+		$("#dDDone").animate({opacity: '0'});
+	}
+};
+
+//character objects with individual healthPoints,
+//attackPoints, and counterAttackPoints.
 
 var char1 = {
 	healthPoint: 100,
@@ -42,7 +58,7 @@ var char2 = {
 
 var char3 = {
 	healthPoint: 175,
-	attackPoints: 5,
+	attackPoints: 2,
 	counterAttackPoints: 45,
 	charHealthUpdate: function(AtkDmg)
 	{
@@ -70,23 +86,24 @@ var char4 = {
 	}
 };
 
+//initilize character divs to variables for dynamic manipulation later on
+
 		var char1Div = $("#char1");
 		var char2Div = $("#char2");
 		var char3Div = $("#char3");
 		var char4Div = $("#char4");
 
-//on click character select
+//When a character div is selected
 $(".char").on("click", function(){
+	//if game is in character select state
 	if (game.currentState == 0)
 	{
-
+		//player chooses a character
 		game.characterSelected = $(this).attr("id");
 		$("#" + game.characterSelected).remove();
 		$("#instructions").text("Choose a defender");
 
-		console.log(game.characterSelected);
-
-
+		//position new attacker into attacker div
 		if (game.characterSelected == "char1")
 		{
 			game.characterObj = char1;
@@ -124,13 +141,15 @@ $(".char").on("click", function(){
 		game.currentState++;
 	}
 
+	//if game is defender select state
 	else if (game.currentState == 1)
 	{
+		//select defender
 		game.defenderSelected = $(this).attr("id");
 		$("#" + game.defenderSelected).remove();
 		$("#instructions").text("Commence the attack!");
-		console.log(game.defenderSelected);
 
+		//position new defender into defender div
 		if (game.defenderSelected == "char1")
 		{
 			game.defenderObj = char1;
@@ -165,42 +184,56 @@ $(".char").on("click", function(){
 			$("#char4").css("position","relative");
 			$("#char4").css("top","300px");
 		}
-		//progresses game to defender select state
+		//progresses game to attack phase state
 		game.currentState++;
 
 	}
-	console.log(game.currentState);
-
-
 
 });
 
+
 $(".attkButton").on("click", function(){
+	//if game is in attack phase
 	 if(game.currentState==2)
 	 {
+		//attacker always hits first
 		game.defenderObj.charHealthUpdate(game.characterObj.attackPoints);
+		//display damage done on window
+		$("#dDDone").text("-" + game.characterObj.attackPoints);
+		$("#dDDone").css("opacity", 1);
+		setTimeout(damage.disapearDefender, 1500);
+		//update character damage
 		game.characterObj.charAttackPointsUpdate();
+
+		//if player has won the game
 		if ((game.defenderObj.healthPoint<=0) && (game.defendersLeft == 0))
 		{
 			$("#instructions").text("You Win!");
 			$("#" + game.defenderSelected).remove();
+			//progress to game over state
 			game.currentState++;
 		}
+		//if a defender is defeated, however there are more defenders left
 		else if(game.defenderObj.healthPoint<=0)
 		{
 			$("#instructions").text("Choose a defender");
 			$("#" + game.defenderSelected).remove();
+			//back to defender select state
 			game.currentState--;
 			game.defendersLeft--;
 		}
-
+		//when player takes damage
 		if(game.currentState==2)
 		{
 			game.characterObj.charHealthUpdate(game.defenderObj.counterAttackPoints);
-		
+			$("#aDDone").text("-" + game.defenderObj.counterAttackPoints);
+			$("#aDDone").css("opacity", 1);
+			setTimeout(damage.disapearAttacker, 1500);
+			//if player loses game
 			if(game.characterObj.healthPoint<=0)
 			{
 				$("#instructions").text("You Lose!");
+				//progress to gameover state
 				game.currentState++
 			}
 		}
