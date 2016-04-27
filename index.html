@@ -13,27 +13,40 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="jumbotron">
-				<h1>Choose your character</h1>
+				<h1 id="instructions">Choose your character</h1>
+				<button class="btn btn-danger attkButton">Attack!</button>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 
 			</div>
-			<div class="col-sm-1">
+			<div class="col-sm-1 attacker">
 
 			</div>
-			<div class="col-sm-4 charSelect">
-				<img id = "char1" src="assets/images/char1.gif">
-				<img id = "char2" src="assets/images/char4.gif">
-				<img id = "char3" src="assets/images/char2Flip.gif">
-				<img id = "char4" src="assets/images/char3Flip.gif">
+			<div class="col-sm-6 charSelect">
+				<div class= "char" id="char1">
+					<h2 id="char1HP">100</h2>
+					<img src="assets/images/char1.gif">
+				</div>
+				<div class= "char" id="char2">
+					<h2 id="char2HP">150</h2>
+					<img src="assets/images/char2.gif">
+				</div>
+				<div class= "char" id="char3">
+					<h2 id="char3HP">175</h2>
+					<img src="assets/images/char3Flip.gif">
+				</div>
+				<div class= "char" id="char4">
+					<h2 id="char4HP">125</h2>
+					<img src="assets/images/char4Flip.gif">
+				</div>
 			</div>
-			<div class="col-sm-1">
+			<div class="col-sm-1 defender">
 
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-2 defenderSelect">
 
 			</div>
 		</div>
